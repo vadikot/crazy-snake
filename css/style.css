@@ -1,0 +1,221 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #278d8d;
+    margin: 0;
+    padding: 0;
+}
+
+.game__info__title {
+    text-align: center;
+    padding: 5px 35px;
+    color: #699a43;
+    background: #fff;
+}
+
+.score__items {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.score__item {
+    font: 18px 'sans-serif';
+    text-align: center;
+    color: #fff;
+    margin: 0;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.field {
+    border: 1px solid #fff;
+}
+
+.column {
+    display: flex;
+}
+
+.cell {
+    width: 49px;
+    height: 49px;
+    /*border: 1px solid #fff;*/
+    /*color: aliceblue;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.column:nth-child(odd) .cell:nth-child(odd) {
+    /*background: #278d8d;*/
+    background: #259a9a;
+}
+
+.column:nth-child(even) .cell:nth-child(even) {
+    background: #259a9a;
+}
+
+.body {
+    background: #699a43 !important;
+}
+
+.body.pink {
+    background: #e008d9 !important;
+}
+
+.head {
+    background: #137c41 !important;
+}
+
+.head.pink {
+    background: #ad04a8 !important;
+}
+
+.food.apple {
+    background: #da3933 !important;
+}
+
+.food.banana {
+    background: yellow !important;
+}
+
+.food.kiwi {
+    background: greenyellow !important;
+}
+
+.buttons-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.right {
+    cursor: pointer;
+    border: 1px solid #fff;
+    text-align: center;
+    margin: 30px;
+    width: 60px;
+    padding: 6px 10px
+}
+
+/*****/
+/* modal */
+/*****/
+/* The Modal (background) */
+.modal {
+    display: flex; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    text-align: center;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    display: none;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Modal Body */
+.modal-body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.modal-body.start {
+    flex-direction: row;
+}
+
+.modal-body .container:first-child {
+    width: 40%;
+}
+
+.modal-body .container:last-child {
+    width: 60%;
+}
+
+.control-buttons {
+    width: 60%;
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 15px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.modal-btn {
+    background: red;
+    padding: 10px 30px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.modal-btn:hover {
+    background: #ee3232;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}

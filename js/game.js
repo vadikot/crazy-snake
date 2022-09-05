@@ -1,13 +1,16 @@
 'use strict';
 
 const game = {
+    timerId: true,
+    startSpeed: 500,
+    isPressDelay: true,
     score: 0,
     isStarted: false,
     isEnded: false,
     previousMoveDirection: 'right',
     scoreEl: document.querySelector('.score'),
     snake: new Snake(FIELD_WIDTH, FIELD_HEIGHT, START_SNAKE_LENGTH).setBody(),
-    field: new Field(FIELD_WIDTH, FIELD_HEIGHT),
+    field: new Field(FIELD_WIDTH, FIELD_HEIGHT), // add setField like snake
 
     start() {
         this.isStarted = true;
@@ -18,6 +21,8 @@ const game = {
         this.field.addFruits(START_FRUIT_AMOUNT);
 
         this.field.createFieldHTMLFromArray();
+
+        this.updateTimer(this.previousMoveDirection);
     },
 
     restart() {
@@ -32,6 +37,7 @@ const game = {
     },
 
     gameOver(status) {
+        this.stopTimer();
         this.isEnded = true;
         modalTitle = (status = 'lose') ? 'Oops... Game over.' : 'You WIN!!!';
         modalBodyText = (status = 'lose') ? `Not bad. Your score is: ${this.score}. Try again!` : `Incredible game! Your score is: ${this.score}. Try do mo score!`;
@@ -48,7 +54,7 @@ const game = {
         let isFieldEnded;
         let nextCell;
 
-        this.field.updateFreeCellsArray();
+        // this.field.updateFreeCellsArray();
 
         switch (direction) {
             case 'up':
@@ -107,9 +113,6 @@ const game = {
                     }
 
                 }
-
-                // console.log(`score: ${this.score}`);
-
                 break;
             case 'down':
                 isFieldEnded = this.snake.bodyArray[0].y + 1 === FIELD_HEIGHT;
@@ -138,9 +141,6 @@ const game = {
                     }
 
                 }
-
-                // console.log(`score: ${this.score}`);
-
                 break;
             case 'left':
                 isFieldEnded = this.snake.bodyArray[0].x - 1 < 0;
@@ -190,5 +190,19 @@ const game = {
             this.isEnded = true;
             this.gameOver('win');
         }
+    },
+
+    updateTimer(direction) {
+        setTimeout(() => this.isPressDelay = false, this.getSpeed() / 5);
+        clearInterval(this.timerId);
+        this.timerId = setInterval(this.move.bind(game), this.getSpeed(), direction);
+    },
+
+    stopTimer() {
+        clearInterval(this.timerId);
+    },
+
+    getSpeed() {
+        return this.startSpeed - this.score * 5;
     },
 }

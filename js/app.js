@@ -33,8 +33,7 @@ function getRandomElFromArray(array, isReturnIndex = false) {
             index: randomArrayIndex,
             element: array[randomArrayIndex],
         };
-    }
-    else {
+    } else {
         return array[randomArrayIndex];
     }
 }
@@ -47,29 +46,37 @@ function keyboardControlHandler(event) {
 
     } else if (game.isEnded && event.key === 'Enter') {
         game.restart();
-    } else if (game.isStarted && !game.isEnded) {
+    } else if (game.isStarted && !game.isEnded && game.isPressDelay === false) {
         switch (event.key) {
             case 'ArrowUp':
-                if (game.previousMoveDirection !== 'down') {
+                if (game.previousMoveDirection === 'left' || game.previousMoveDirection === 'right') {
+                    game.isPressDelay = true;
                     game.move('up')
+                    game.updateTimer('up')
                     game.previousMoveDirection = "up";
                 }
                 break;
             case 'ArrowRight':
-                if (game.previousMoveDirection !== 'left') {
+                if (game.previousMoveDirection === 'up' || game.previousMoveDirection === 'down') {
+                    game.isPressDelay = true;
                     game.move('right')
+                    game.updateTimer('right')
                     game.previousMoveDirection = "right";
                 }
                 break;
             case 'ArrowDown':
-                if (game.previousMoveDirection !== 'up') {
+                if (game.previousMoveDirection === 'left' || game.previousMoveDirection === 'right') {
+                    game.isPressDelay = true;
                     game.move('down')
+                    game.updateTimer('down')
                     game.previousMoveDirection = "down";
                 }
                 break;
             case 'ArrowLeft':
-                if (game.previousMoveDirection !== 'right') {
+                if (game.previousMoveDirection === 'up' || game.previousMoveDirection === 'down') {
+                    game.isPressDelay = true;
                     game.move('left')
+                    game.updateTimer('left')
                     game.previousMoveDirection = "left";
                 }
                 break;

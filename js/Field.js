@@ -84,7 +84,6 @@ class Field {
                     }
                     // (cell === null) ? this.freeCellsArray.push({y: indexY, x: indexX})
                 }));
-
         this.freeCellsArray = newFreeCellsArray;
     }
 

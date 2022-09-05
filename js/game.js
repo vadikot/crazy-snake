@@ -5,14 +5,17 @@ const game = {
     startSpeed: 500,
     isPressDelay: true,
     score: 0,
+    bestScore: (localStorage.getItem('bestScore') === null) ? 0 : localStorage.getItem('bestScore'),
     isStarted: false,
     isEnded: false,
     previousMoveDirection: 'right',
     scoreEl: document.querySelector('.score'),
+    bestScoreEl: document.querySelector('.best__score'),
     snake: new Snake(FIELD_WIDTH, FIELD_HEIGHT, START_SNAKE_LENGTH).setBody(),
     field: new Field(FIELD_WIDTH, FIELD_HEIGHT), // add setField like snake
 
     start() {
+        this.updateBestScoreInHTML();
         this.isStarted = true;
         modal.close();
 
@@ -32,22 +35,20 @@ const game = {
         this.isEnded = false;
         this.score = 0;
         this.updateScoreInHTML();
+        this.updateBestScoreInHTML();
         this.previousMoveDirection = 'right';
         this.start();
     },
 
     gameOver(status) {
         this.stopTimer();
+        this.setBestScore();
         this.isEnded = true;
         modalTitle = (status = 'lose') ? 'Oops... Game over.' : 'You WIN!!!';
         modalBodyText = (status = 'lose') ? `Not bad. Your score is: ${this.score}. Try again!` : `Incredible game! Your score is: ${this.score}. Try do mo score!`;
         modalGameStatus = 'end';
 
         modal.show().createNew(modalTitle, modalBodyText, modalGameStatus);
-    },
-
-    updateScoreInHTML() {
-        this.scoreEl.innerHTML = this.score;
     },
 
     move(direction) {
@@ -204,5 +205,20 @@ const game = {
 
     getSpeed() {
         return this.startSpeed - this.score * 5;
+    },
+
+    updateScoreInHTML() {
+        this.scoreEl.innerHTML = this.score;
+    },
+
+    updateBestScoreInHTML() {
+        this.bestScoreEl.innerHTML = this.bestScore;
+    },
+
+    setBestScore() {
+        if (this.score > this.bestScore) {
+            localStorage.setItem('bestScore', this.score);
+            this.bestScore = this.score;
+        }
     },
 }
